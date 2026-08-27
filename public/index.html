@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SereneSphere - Modern Relaxation & Focus Hub</title>
+    <title>SereneSphere - Global Relaxation & Support Hub</title>
     <style>
         :root {
-            --bg-color: #090d16;
+            --bg-color: #0b0f19;
             --card-bg: #111827;
-            --accent-glow: #6366f1;
+            --accent: #6366f1;
+            --accent-hover: #4f46e5;
             --text-main: #f3f4f6;
             --text-muted: #9ca3af;
-            --border-color: #1f2937;
+            --border: #1f2937;
         }
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, sans-serif;
             margin: 0;
             padding: 20px;
             display: flex;
@@ -26,145 +27,149 @@
         }
         .container {
             width: 100%;
-            max-width: 500px;
+            max-width: 480px;
             background: var(--card-bg);
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-            border: 1px solid var(--border-color);
+            padding: 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            border: 1px solid var(--border);
             text-align: center;
         }
-        h1 { color: #818cf8; margin-bottom: 5px; font-size: 28px; letter-spacing: -0.5px; }
-        .subtitle { color: var(--text-muted); font-size: 14px; margin-bottom: 25px; }
-        
-        /* Motivational Quote Box */
-        .quote-box {
-            background: #1f2937;
-            padding: 15px;
-            border-radius: 12px;
-            font-style: italic;
-            font-size: 13px;
-            color: #d1d5db;
-            margin-bottom: 25px;
-            border-left: 4px solid var(--accent-glow);
-        }
+        h1 { color: #818cf8; margin-bottom: 4px; font-size: 26px; }
+        .subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
 
         .btn {
-            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
             color: white;
-            padding: 14px 24px;
+            padding: 14px 20px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
             width: 100%;
-            transition: all 0.3s ease;
+            transition: 0.3s;
             box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            margin-top: 10px;
         }
         .btn:hover { opacity: 0.9; transform: translateY(-1px); }
-        .btn:active { transform: scale(0.98); }
 
-        /* Breathing Animation UI */
+        /* Breathing Section */
         #relaxation-box {
             display: none;
-            margin-top: 25px;
-            padding: 25px;
+            margin-top: 20px;
+            padding: 20px;
             background: #0d1322;
-            border-radius: 14px;
-            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            border: 1px solid var(--border);
         }
         .breathing-circle {
-            width: 90px;
-            height: 90px;
+            width: 80px;
+            height: 80px;
             background: radial-gradient(circle, #818cf8, #4f46e5);
             border-radius: 50%;
             margin: 15px auto;
-            box-shadow: 0 0 20px rgba(129, 140, 248, 0.5);
             animation: breathe 4s infinite alternate ease-in-out;
         }
         @keyframes breathe {
-            0% { transform: scale(0.75); opacity: 0.4; }
+            0% { transform: scale(0.8); opacity: 0.4; }
             100% { transform: scale(1.25); opacity: 1; }
         }
 
-        /* Supporters Section */
+        /* Supporters Box */
         .box {
-            margin-top: 25px;
-            padding: 18px;
+            margin-top: 20px;
+            padding: 16px;
             background: #0d1322;
-            border-radius: 12px;
+            border-radius: 16px;
             text-align: left;
-            border: 1px solid var(--border-color);
+            border: 1px solid var(--border);
         }
-        .box h3 { margin-top: 0; font-size: 15px; color: #e5e7eb; display: flex; align-items: center; gap: 8px; }
-        ul { padding-left: 18px; color: var(--text-muted); margin: 8px 0 0 0; font-size: 14px; }
-        li { margin-bottom: 6px; }
+        .box h3 { margin: 0 0 10px 0; font-size: 14px; color: #e5e7eb; }
+        ul { padding-left: 18px; color: var(--text-muted); margin: 0; font-size: 13px; }
+        li { margin-bottom: 5px; }
 
-        /* Form to Add Supporter */
         .form-group {
-            margin-top: 15px;
+            margin-top: 12px;
             display: flex;
             gap: 8px;
         }
         .form-group input {
             flex: 1;
-            padding: 10px 14px;
+            padding: 10px 12px;
             background: #1f2937;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
             color: white;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
         }
         .form-group input:focus { border-color: #818cf8; }
-        .form-group button {
-            width: auto;
-            padding: 10px 16px;
-            font-size: 14px;
-            border-radius: 8px;
+
+        /* Coffee Support & Store Button */
+        .support-links {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
         }
+        .support-btn {
+            flex: 1;
+            background: #1f2937;
+            color: #f3f4f6;
+            padding: 10px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+            display: inline-block;
+            text-align: center;
+        }
+        .support-btn:hover { background: #374151; border-color: #818cf8; }
     </style>
 </head>
 <body>
 
     <div class="container">
         <h1>SereneSphere</h1>
-        <div class="subtitle">Your ultimate digital sanctuary for focus & relaxation.</div>
-
-        <!-- Daily Vibe Quote -->
-        <div class="quote-box" id="quote-text">
-            "Breathe in deep, let go of tension, and focus on the present moment."
-        </div>
+        <div class="subtitle">Your ultimate sanctuary for focus, relaxation & peace.</div>
 
         <button class="btn" onclick="toggleRelaxation()">Start Focus & Breathing Session</button>
 
-        <!-- Interactive Breathing Module -->
+        <!-- Interactive Breathing Module with Sound Simulation -->
         <div id="relaxation-box">
             <div class="breathing-circle"></div>
             <h3 id="breath-status" style="color: #818cf8; margin: 10px 0 5px 0;">Inhale Slowly...</h3>
-            <p style="margin: 0; font-size: 13px; color: var(--text-muted);">Sync your breath with the glowing pulse.</p>
+            <audio id="chill-audio" loop src="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg"></audio>
+            <button class="btn" style="background: #374151; font-size: 13px; padding: 8px; margin-top: 10px;" onclick="toggleAudio()">🔊 Toggle Rain Ambience</button>
         </div>
 
         <!-- Coffee Heroes / Supporters Hub -->
         <div class="box">
-            <h3>☕ Coffee Heroes (Supporters)</h3>
+            <h3>☕ Coffee Heroes (Global Supporters)</h3>
             <ul id="supporter-list">
-                <li>Loading global supporters...</li>
+                <li>Loading supporters...</li>
             </ul>
 
-            <!-- Add Support Form -->
             <div class="form-group">
-                <input type="text" id="supporter-name" placeholder="Enter your name...">
-                <button class="btn" onclick="addSupporter()">Support</button>
+                <input type="text" id="supporter-name" placeholder="Your name...">
+                <button class="btn" style="width: auto; margin-top:0; padding: 10px 14px; font-size: 13px;" onclick="addSupporter()">Join</button>
             </div>
+        </div>
+
+        <!-- Real Payment & Store Links -->
+        <div class="support-links">
+            <a href="https://www.buymeacoffee.com" target="_blank" class="support-btn">☕ Buy Coffee</a>
+            <a href="https://play.google.com" target="_blank" class="support-btn">📱 Get App</a>
         </div>
     </div>
 
     <script>
-        // Relaxation Session Toggle
         let isRunning = false;
         let timer;
+        const audio = document.getElementById('chill-audio');
+
         function toggleRelaxation() {
             const box = document.getElementById('relaxation-box');
             const status = document.getElementById('breath-status');
@@ -172,21 +177,31 @@
             if (!isRunning) {
                 box.style.display = 'block';
                 isRunning = true;
+                audio.play().catch(e => console.log("Audio autoplay restricted"));
                 timer = setInterval(() => {
                     status.textContent = status.textContent.includes('Inhale') ? 'Exhale Gently...' : 'Inhale Slowly...';
                 }, 4000);
             } else {
                 box.style.display = 'none';
                 isRunning = false;
+                audio.pause();
                 clearInterval(timer);
             }
         }
 
-        // Fetch Supporters from Node.js Server
+        function toggleAudio() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
         async function loadSupporters() {
             try {
-                const response = await fetch('/api/supporters');
-                const data = await response.json();
+                const response =/api/supporters';
+                const res = await fetch('/api/supporters');
+                const data = await res.json();
                 const listEl = document.getElementById('supporter-list');
                 listEl.innerHTML = '';
                 data.forEach(item => {
@@ -199,7 +214,6 @@
             }
         }
 
-        // Add New Supporter via API
         async function addSupporter() {
             const nameInput = document.getElementById('supporter-name');
             const name = nameInput.value.trim();
@@ -224,4 +238,4 @@
         loadSupporters();
     </script>
 </body>
-    </html>
+</html>
