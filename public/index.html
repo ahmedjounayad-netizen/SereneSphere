@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SereneSphere - Ultimate Peace & Sound Sanctuary</title>
+    <title>SereneSphere - Mental Clarity & Peace</title>
     <style>
         :root {
             --bg: #05070f;
@@ -37,27 +37,21 @@
             text-align: center;
         }
         
-        /* Logo & Header */
-        .logo-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 8px;
-        }
+        /* Logo & Brand Header */
         .logo-badge {
-            width: 42px;
-            height: 42px;
+            width: 60px;
+            height: 60px;
             background: linear-gradient(135deg, #6366f1, #a855f7);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 20px;
-            box-shadow: 0 0 15px var(--accent-glow);
+            font-size: 28px;
+            margin: 0 auto 15px auto;
+            box-shadow: 0 0 25px var(--accent-glow);
         }
-        h1 { color: #f8fafc; margin: 0; font-size: 24px; font-weight: 700; letter-spacing: 0.5px; }
-        .subtitle { color: var(--muted); font-size: 12px; margin-bottom: 20px; }
+        h1 { color: #f8fafc; margin: 0 0 5px 0; font-size: 26px; font-weight: 700; }
+        .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 25px; line-height: 1.4; }
 
         .btn {
             background: linear-gradient(135deg, #6366f1, #4f46e5);
@@ -75,10 +69,38 @@
         }
         .btn:hover { opacity: 0.95; transform: translateY(-2px); }
 
-        /* Circular Futuristic Relaxation Box */
-        #relaxation-panel {
+        /* Welcome Screen Input */
+        #welcome-screen {
+            display: block;
+        }
+        .welcome-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #111827;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: white;
+            font-size: 14px;
+            outline: none;
+            box-sizing: border-box;
+            margin-bottom: 12px;
+            text-align: center;
+        }
+        .welcome-input:focus { border-color: #818cf8; }
+
+        /* Main App Interface (Initially Hidden) */
+        #main-app {
             display: none;
-            margin-top: 20px;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Circular Futuristic Relaxation Box */
+        .relaxation-panel {
+            margin-top: 15px;
             padding: 22px;
             background: #070a14;
             border-radius: 20px;
@@ -86,8 +108,8 @@
         }
         .circle-wrapper {
             position: relative;
-            width: 110px;
-            height: 110px;
+            width: 120px;
+            height: 120px;
             margin: 10px auto 15px auto;
         }
         .perfect-circle {
@@ -96,17 +118,17 @@
             background: radial-gradient(circle, rgba(99,102,241,0.8) 0%, rgba(79,70,229,0.3) 70%, transparent 100%);
             border: 2px solid #818cf8;
             border-radius: 50%;
-            box-shadow: 0 0 30px var(--accent-glow);
+            box-shadow: 0 0 35px var(--accent-glow);
             animation: breathe-circle 4s infinite alternate ease-in-out;
         }
         @keyframes breathe-circle {
             0% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 15px rgba(99,102,241,0.3); }
-            100% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 35px rgba(99,102,241,0.8); }
+            100% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 40px rgba(99,102,241,0.8); }
         }
 
         /* Sound Selector Dropdown */
         .sound-selector {
-            margin-top: 10px;
+            margin-top: 15px;
             display: flex;
             flex-direction: column;
             gap: 6px;
@@ -139,7 +161,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            max-height: 150px;
+            max-height: 140px;
             overflow-y: auto;
         }
         .supporters-list li {
@@ -157,14 +179,14 @@
         .supporter-badge { font-size: 9px; color: var(--gold); }
         .supporter-coffees { background: rgba(99, 102, 241, 0.2); color: #818cf8; padding: 3px 8px; border-radius: 20px; font-weight: 700; }
 
-        /* Support Form & PayPal Link */
+        /* Support Form & PayPal */
         .support-form {
             margin-top: 15px;
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-        .support-form input, .support-form select {
+        .support-form select {
             padding: 10px 12px;
             background: #111827;
             border: 1px solid var(--border);
@@ -173,103 +195,113 @@
             font-size: 12px;
             outline: none;
         }
-        .support-form input:focus { border-color: #818cf8; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Home Logo & Brand Header -->
-        <div class="logo-container">
+        <!-- Step 1: Welcome Home Screen (Logo + Name Entry) -->
+        <div id="welcome-screen">
             <div class="logo-badge">🌿</div>
             <h1>SereneSphere</h1>
-        </div>
-        <div class="subtitle">Your Futuristic Sanctuary for Mental Clarity & Peace</div>
-
-        <!-- Main Relaxation Trigger Button -->
-        <button class="btn" onclick="toggleSession()">🧘 Start Focus & Relaxation Session</button>
-
-        <!-- Interactive Futuristic Breathing & Multi-Sound Panel -->
-        <div id="relaxation-panel">
-            <div class="circle-wrapper">
-                <div class="perfect-circle"></div>
-            </div>
-            <h3 id="status-text" style="color: #818cf8; margin: 5px 0 10px 0; font-size: 14px;">Inhale Deeply...</h3>
+            <div class="subtitle">Your ultimate sanctuary for mental clarity, relaxation, and inner peace. Enter your name to begin your journey.</div>
             
-            <audio id="ambient-audio" loop></audio>
-
-            <div class="sound-selector">
-                <label>🎵 Select Ambient Soundscape:</label>
-                <select id="sound-dropdown" onchange="changeSound()">
-                    <option value="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg">🌧️ Heavy Rain Ambience</option>
-                    <option value="https://actions.google.com/sounds/v1/weather/wind_gusts.ogg">🍃 Gentle Wind Breeze</option>
-                    <option value="https://actions.google.com/sounds/v1/environments/forest_birds.ogg">🐦 Forest Birds & Nature</option>
-                    <option value="https://actions.google.com/sounds/v1/water/ocean_waves.ogg">🌊 Calming Ocean Waves</option>
-                </select>
-            </div>
+            <input type="text" id="user-display-name" class="welcome-input" placeholder="Enter your name or brand...">
+            <button class="btn" onclick="enterApp()">✨ Enter Sanctuary</button>
         </div>
 
-        <!-- Coffee Heroes Hall of Fame & PayPal Integration -->
-        <div class="board-box">
-            <h3>🏆 Coffee Heroes Hall of Fame</h3>
-            <div class="board-desc">
-                Support via PayPal to secure permanent top rank & high visibility on our global leaderboard.
+        <!-- Step 2: Main App Interface (Relaxation, Sounds & Coffee Support) -->
+        <div id="main-app">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 30px; height: 30px; background: #6366f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">🌿</div>
+                    <span style="font-weight: 700; font-size: 15px; color: #818cf8;">SereneSphere</span>
+                </div>
+                <span id="greeting-user" style="font-size: 12px; color: var(--muted);">Hello, Guest</span>
             </div>
-            
-            <ul class="supporters-list" id="leaderboard">
-                <li><span>Loading legends...</span></li>
-            </ul>
 
-            <!-- Support Submission Form -->
-            <div class="support-form">
-                <input type="text" id="donor-name" placeholder="Your Name or Brand...">
-                <select id="coffee-amount">
-                    <option value="1">1 Cup of Coffee ☕ ($5)</option>
-                    <option value="3">3 Cups of Coffee ☕ ($15)</option>
-                    <option value="5">5 Cups of Coffee ☕ ($25)</option>
-                    <option value="10">10+ Legend Coffees 👑 ($50+)</option>
-                </select>
-                <button class="btn" style="margin-top: 0; padding: 11px; background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);" onclick="processPayPalSupport()">☕ Proceed to PayPal & Claim Rank</button>
+            <!-- Relaxation & Multi-Sound Panel -->
+            <div class="relaxation-panel">
+                <div class="circle-wrapper">
+                    <div class="perfect-circle"></div>
+                </div>
+                <h3 id="status-text" style="color: #818cf8; margin: 5px 0 10px 0; font-size: 14px;">Inhale Deeply...</h3>
+                
+                <audio id="ambient-audio" loop></audio>
+
+                <div class="sound-selector">
+                    <label>🎵 Select Soundscape:</label>
+                    <select id="sound-dropdown" onchange="changeSound()">
+                        <option value="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg">🌧️ Heavy Rain Ambience</option>
+                        <option value="https://actions.google.com/sounds/v1/weather/wind_gusts.ogg">🍃 Gentle Wind Breeze</option>
+                        <option value="https://actions.google.com/sounds/v1/environments/forest_birds.ogg">🐦 Forest Birds & Nature</option>
+                        <option value="https://actions.google.com/sounds/v1/water/ocean_waves.ogg">🌊 Calming Ocean Waves</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Coffee Heroes Hall of Fame & PayPal Integration -->
+            <div class="board-box">
+                <h3>🏆 Coffee Heroes Hall of Fame</h3>
+                <div class="board-desc">
+                    Feeling peaceful? Fuel this project via PayPal to secure permanent top rank & high visibility on our global leaderboard.
+                </div>
+                
+                <ul class="supporters-list" id="leaderboard">
+                    <li><span>Loading legends...</span></li>
+                </ul>
+
+                <!-- Support Submission Form -->
+                <div class="support-form">
+                    <select id="coffee-amount">
+                        <option value="1">1 Cup of Coffee ☕ ($5)</option>
+                        <option value="3">3 Cups of Coffee ☕ ($15)</option>
+                        <option value="5">5 Cups of Coffee ☕ ($25)</option>
+                        <option value="10">10+ Legend Coffees 👑 ($50+)</option>
+                    </select>
+                    <button class="btn" style="margin-top: 0; padding: 11px; background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);" onclick="processPayPalSupport()">☕ Proceed to PayPal & Claim Rank</button>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        let active = false;
+        let currentUserName = "";
+        let audio = document.getElementById('ambient-audio');
         let interval;
-        const audio = document.getElementById('ambient-audio');
-        
-        // আপনার রিয়েল পেপাল লিংক এখানে কনফিগার করা হলো
-        const PAYPAL_BASE_URL = "https://paypal.me/JounayadAhmed?locale.x=en_US&country.x=OM"; 
+        const PAYPAL_BASE_URL = "https://paypal.me/JounayadAhmed?locale.x=en_US&country.x=OM";
 
-        function toggleSession() {
-            const panel = document.getElementById('relaxation-panel');
-            const status = document.getElementById('status-text');
+        function enterApp() {
+            const nameInput = document.getElementById('user-display-name').value.trim();
+            if (!nameInput) return alert('Please enter your name to enter the sanctuary!');
+            
+            currentUserName = nameInput;
+            document.getElementById('greeting-user').textContent = `Hello, ${currentUserName}`;
+            
+            // হোম স্ক্রিন হাইড করে মেইন অ্যাপ শো করা
+            document.getElementById('welcome-screen').style.display = 'none';
+            document.getElementById('main-app').style.display = 'block';
+
+            // সাউন্ড ও ব্রিদিং সেশন অটো স্টার্ট করা
+            startRelaxationSession();
+            fetchLeaderboard();
+        }
+
+        function startRelaxationSession() {
             const dropdown = document.getElementById('sound-dropdown');
+            audio.src = dropdown.value;
+            audio.play().catch(e => console.log("Audio play restricted"));
 
-            if (!active) {
-                panel.style.display = 'block';
-                active = true;
-                audio.src = dropdown.value;
-                audio.play().catch(e => console.log("Audio play restricted"));
-                
-                interval = setInterval(() => {
-                    status.textContent = status.textContent.includes('Inhale') ? 'Exhale Gently...' : 'Inhale Deeply...';
-                }, 4000);
-            } else {
-                panel.style.display = 'none';
-                active = false;
-                audio.pause();
-                clearInterval(interval);
-            }
+            const status = document.getElementById('status-text');
+            interval = setInterval(() => {
+                status.textContent = status.textContent.includes('Inhale') ? 'Exhale Gently...' : 'Inhale Deeply...';
+            }, 4000);
         }
 
         function changeSound() {
             const dropdown = document.getElementById('sound-dropdown');
-            if (active) {
-                audio.src = dropdown.value;
-                audio.play();
-            }
+            audio.src = dropdown.value;
+            audio.play();
         }
 
         async function fetchLeaderboard() {
@@ -295,31 +327,23 @@
         }
 
         async function processPayPalSupport() {
-            const name = document.getElementById('donor-name').value.trim();
             const coffees = document.getElementById('coffee-amount').value;
 
-            if (!name) return alert('Please enter your name or brand first!');
-
-            // ব্যাকএন্ডে সাপোর্টার সেভ করা
+            // ব্যাকএন্ডে ইউজারনেমসহ সেভ করা
             try {
                 await fetch('/api/add-supporter', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, coffees })
+                    body: JSON.stringify({ name: currentUserName, coffees })
                 });
             } catch (err) {
                 console.error(err);
             }
 
-            // আপনার পেপাল লিংকে রিডাইরেক্ট করা
-            alert('Redirecting you securely to your PayPal account to complete coffee support...');
+            alert('Redirecting securely to your PayPal account to complete coffee support...');
             window.open(PAYPAL_BASE_URL, '_blank');
-
-            document.getElementById('donor-name').value = '';
             fetchLeaderboard();
         }
-
-        fetchLeaderboard();
     </script>
 </body>
-    </html>
+            </html>
