@@ -25,6 +25,7 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            transition: background 0.8s ease;
         }
         .container {
             width: 100%;
@@ -35,6 +36,7 @@
             box-shadow: 0 25px 60px rgba(0,0,0,0.9);
             border: 1px solid var(--border);
             text-align: center;
+            transition: all 0.8s ease;
         }
         
         /* Logo & Brand Header */
@@ -49,6 +51,7 @@
             font-size: 28px;
             margin: 0 auto 15px auto;
             box-shadow: 0 0 25px var(--accent-glow);
+            transition: 0.8s ease;
         }
         h1 { color: #f8fafc; margin: 0 0 5px 0; font-size: 26px; font-weight: 700; }
         .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 25px; line-height: 1.4; }
@@ -72,10 +75,7 @@
         }
         .btn:hover { opacity: 0.95; transform: translateY(-2px); }
 
-        /* Welcome Screen Input */
-        #welcome-screen {
-            display: block;
-        }
+        #welcome-screen { display: block; }
         .welcome-input {
             width: 100%;
             padding: 12px 15px;
@@ -91,7 +91,6 @@
         }
         .welcome-input:focus { border-color: #818cf8; }
 
-        /* Main App Interface */
         #main-app {
             display: none;
             animation: fadeIn 0.5s ease-in-out;
@@ -101,19 +100,23 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Circular Futuristic Relaxation Box */
+        /* Immersive Dynamic Visualizer Panel */
         .relaxation-panel {
             margin-top: 15px;
             padding: 22px;
             background: #070a14;
             border-radius: 20px;
             border: 1px solid var(--border);
+            transition: 0.8s ease;
         }
         .circle-wrapper {
             position: relative;
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             margin: 10px auto 15px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .perfect-circle {
             width: 100%;
@@ -123,13 +126,22 @@
             border-radius: 50%;
             box-shadow: 0 0 35px var(--accent-glow);
             animation: breathe-circle 4s infinite alternate ease-in-out;
+            transition: 0.8s ease;
+        }
+        .core-icon {
+            position: absolute;
+            font-size: 32px;
+            animation: float-icon 3s infinite alternate ease-in-out;
         }
         @keyframes breathe-circle {
-            0% { transform: scale(0.8); opacity: 0.5; box-shadow: 0 0 15px rgba(99,102,241,0.3); }
-            100% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 40px rgba(99,102,241,0.8); }
+            0% { transform: scale(0.85); opacity: 0.6; }
+            100% { transform: scale(1.12); opacity: 1; box-shadow: 0 0 50px var(--accent-glow); }
+        }
+        @keyframes float-icon {
+            0% { transform: translateY(-4px); }
+            100% { transform: translateY(4px); }
         }
 
-        /* Sound Selector Dropdown */
         .sound-selector {
             margin-top: 15px;
             display: flex;
@@ -148,7 +160,6 @@
             outline: none;
         }
 
-        /* Leaderboard Box */
         .board-box {
             margin-top: 20px;
             padding: 16px;
@@ -164,7 +175,7 @@
             list-style: none;
             padding: 0;
             margin: 0;
-            max-height: 140px;
+            max-height: 130px;
             overflow-y: auto;
         }
         .supporters-list li {
@@ -182,7 +193,6 @@
         .supporter-badge { font-size: 9px; color: var(--gold); }
         .supporter-coffees { background: rgba(99, 102, 241, 0.2); color: #818cf8; padding: 3px 8px; border-radius: 20px; font-weight: 700; }
 
-        /* Support Form */
         .support-form {
             margin-top: 15px;
             display: flex;
@@ -200,9 +210,9 @@
         }
     </style>
 </head>
-<body>
+<body id="app-body">
 
-    <div class="container">
+    <div class="container" id="main-container">
         <!-- Welcome Screen -->
         <div id="welcome-screen">
             <div class="logo-badge">🌿</div>
@@ -217,35 +227,36 @@
         <div id="main-app">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
-                    <div style="width: 30px; height: 30px; background: #6366f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">🌿</div>
-                    <span style="font-weight: 700; font-size: 15px; color: #818cf8;">SereneSphere</span>
+                    <div id="top-logo-icon" style="width: 30px; height: 30px; background: #6366f1; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; transition: 0.8s;">🌿</div>
+                    <span style="font-weight: 700; font-size: 15px; color: #818cf8;" id="brand-title">SereneSphere</span>
                 </div>
                 <span id="greeting-user" style="font-size: 12px; color: var(--muted);">Hello, Guest</span>
             </div>
 
-            <!-- Relaxation & Therapeutic Sounds Panel -->
-            <div class="relaxation-panel">
+            <!-- Relaxation & Immersive Soundscape Panel -->
+            <div class="relaxation-panel" id="panel-box">
                 <div class="circle-wrapper">
-                    <div class="perfect-circle"></div>
+                    <div class="perfect-circle" id="visual-circle"></div>
+                    <div class="core-icon" id="core-emoji">🌧️</div>
                 </div>
                 <h3 id="status-text" style="color: #818cf8; margin: 5px 0 10px 0; font-size: 14px;">Inhale Deeply...</h3>
                 
-                <!-- অডিও ট্যাগ যেখানে লুপ এবং ক্রসঅরিজিন এনাবল করা হয়েছে -->
                 <audio id="ambient-audio" loop crossorigin="anonymous"></audio>
 
                 <div class="sound-selector">
-                    <label>🎵 Select Scientific Therapeutic Soundscape:</label>
+                    <label>🎵 Select Immersive Therapeutic Soundscape:</label>
                     <select id="sound-dropdown" onchange="changeSound()">
-                        <!-- রিলায়েবল ও হাই-কোয়ালিটি স্ট্রিমিং লিংক -->
-                        <option value="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg">🌧️ Therapeutic Deep Rain & Thunder</option>
-                        <option value="https://actions.google.com/sounds/v1/weather/wind_gusts.ogg">🍃 Gentle Wind Breeze & Calm</option>
-                        <option value="https://actions.google.com/sounds/v1/environments/forest_birds.ogg">🐦 Forest Birds & Healing Nature</option>
-                        <option value="https://actions.google.com/sounds/v1/water/ocean_waves.ogg">🌊 Deep Theta Ocean Waves</option>
+                        <option value="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg" data-emoji="🌧️" data-theme="rain">🌧️ Deep Heavy Rain & Thunder (Focus & Sleep)</option>
+                        <option value="https://actions.google.com/sounds/v1/environments/forest_birds.ogg" data-emoji="🐦" data-theme="forest">🐦 Peaceful Forest Birds & Nature (Anxiety Relief)</option>
+                        <option value="https://actions.google.com/sounds/v1/weather/wind_gusts.ogg" data-emoji="🍃" data-theme="wind">🍃 Gentle Wind Breeze & Calm (Mind Clearing)</option>
+                        <option value="https://actions.google.com/sounds/v1/water/ocean_waves.ogg" data-emoji="🌊" data-theme="ocean">🌊 Deep Theta Ocean Waves (Deep Relaxation)</option>
+                        <option value="https://actions.google.com/sounds/v1/weather/light_rain.ogg" data-emoji="🌦️" data-theme="lightrain">🌦️ Soft Drizzle & Calm Atmosphere (Meditation)</option>
+                        <option value="https://actions.google.com/sounds/v1/ambiences/outdoor_altar_ambience.ogg" data-emoji="🧘" data-theme="zen">🧘 Zen Temple & Deep Meditation Vibe (Inner Peace)</option>
                     </select>
                 </div>
             </div>
 
-            <!-- Coffee Heroes Hall of Fame & Direct PayPal Button -->
+            <!-- Coffee Heroes Hall of Fame -->
             <div class="board-box">
                 <h3>🏆 Coffee Heroes Hall of Fame</h3>
                 <div class="board-desc">
@@ -256,7 +267,6 @@
                     <li><span>Loading legends...</span></li>
                 </ul>
 
-                <!-- Support Form -->
                 <div class="support-form">
                     <select id="coffee-amount">
                         <option value="1">1 Cup of Coffee ☕ ($5)</option>
@@ -264,7 +274,6 @@
                         <option value="5">5 Cups of Coffee ☕ ($25)</option>
                         <option value="10">10+ Legend Coffees 👑 ($50+)</option>
                     </select>
-                    <!-- ডিরেক্ট পেপাল লিংক ওপেন করার বাটন -->
                     <a href="https://paypal.me/JounayadAhmed?locale.x=en_US&country.x=OM" target="_blank" class="btn" style="margin-top: 0; padding: 11px; background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); text-align: center;" onclick="registerSupportName()">☕ Proceed to PayPal & Claim Rank</a>
                 </div>
             </div>
@@ -275,6 +284,15 @@
         let currentUserName = "";
         let audio = document.getElementById('ambient-audio');
         let interval;
+
+        const themes = {
+            rain: { bg: '#040712', card: '#0b1021', accent: '#3b82f6', glow: 'rgba(59, 130, 246, 0.6)' },
+            forest: { bg: '#041008', card: '#0a1a10', accent: '#10b981', glow: 'rgba(16, 185, 129, 0.6)' },
+            wind: { bg: '#090b10', card: '#121724', accent: '#8b5cf6', glow: 'rgba(139, 92, 246, 0.6)' },
+            ocean: { bg: '#020c14', card: '#081826', accent: '#06b6d4', glow: 'rgba(6, 182, 212, 0.6)' },
+            lightrain: { bg: '#070a14', card: '#0e1322', accent: '#6366f1', glow: 'rgba(99, 102, 241, 0.6)' },
+            zen: { bg: '#100c07', card: '#1c1610', accent: '#f59e0b', glow: 'rgba(245, 158, 11, 0.6)' }
+        };
 
         function enterApp() {
             const nameInput = document.getElementById('user-display-name').value.trim();
@@ -291,11 +309,7 @@
         }
 
         function startRelaxationSession() {
-            const dropdown = document.getElementById('sound-dropdown');
-            audio.src = dropdown.value;
-            audio.load();
-            audio.play().catch(e => console.log("Audio play restricted by browser policy:", e));
-
+            changeSound();
             const status = document.getElementById('status-text');
             clearInterval(interval);
             interval = setInterval(() => {
@@ -305,10 +319,29 @@
 
         function changeSound() {
             const dropdown = document.getElementById('sound-dropdown');
+            const selectedOption = dropdown.options[dropdown.selectedIndex];
+            const soundUrl = dropdown.value;
+            const emoji = selectedOption.getAttribute('data-emoji');
+            const themeKey = selectedOption.getAttribute('data-theme');
+
+            // Update UI Dynamic Visualizer Theme
+            document.getElementById('core-emoji').textContent = emoji;
+            applyTheme(themeKey);
+
             audio.pause();
-            audio.src = dropdown.value;
+            audio.src = soundUrl;
             audio.load();
             audio.play().catch(e => console.log("Audio play restricted by browser policy:", e));
+        }
+
+        function applyTheme(key) {
+            const t = themes[key] || themes.rain;
+            document.body.style.backgroundColor = t.bg;
+            document.getElementById('main-container').style.backgroundColor = t.card;
+            document.getElementById('panel-box').style.backgroundColor = t.bg;
+            document.getElementById('visual-circle').style.borderColor = t.accent;
+            document.getElementById('visual-circle').style.boxShadow = `0 0 45px ${t.glow}`;
+            document.getElementById('visual-circle').style.background = `radial-gradient(circle, ${t.accent}cc 0%, ${t.accent}33 70%, transparent 100%)`;
         }
 
         async function fetchLeaderboard() {
@@ -335,7 +368,6 @@
 
         async function registerSupportName() {
             const coffees = document.getElementById('coffee-amount').value;
-
             try {
                 await fetch('/api/add-supporter', {
                     method: 'POST',
@@ -345,9 +377,8 @@
             } catch (err) {
                 console.error(err);
             }
-            
             setTimeout(fetchLeaderboard, 1500);
         }
     </script>
 </body>
-</html>
+                </html>
