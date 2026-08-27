@@ -1,7 +1,7 @@
 {
-  "name": "empathy-sync-full-app",
-  "version": "1.0.0",
-  "description": "Complete Empathy Sync Web App",
+  "name": "sereneshphere-app",
+  "version": "2.0.0",
+  "description": "SereneSphere Relaxation & Permanent Coffee Heroes Hub",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
