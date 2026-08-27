@@ -230,15 +230,17 @@
                 </div>
                 <h3 id="status-text" style="color: #818cf8; margin: 5px 0 10px 0; font-size: 14px;">Inhale Deeply...</h3>
                 
-                <audio id="ambient-audio" loop></audio>
+                <!-- অডিও ট্যাগ যেখানে লুপ এবং ক্রসঅরিজিন এনাবল করা হয়েছে -->
+                <audio id="ambient-audio" loop crossorigin="anonymous"></audio>
 
                 <div class="sound-selector">
-                    <label>🎵 Select Therapeutic Soundscape:</label>
+                    <label>🎵 Select Scientific Therapeutic Soundscape:</label>
                     <select id="sound-dropdown" onchange="changeSound()">
-                        <option value="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db3227449a.mp3?filename=rain-and-thunder-nature-sounds-7098.mp3">🌧️ Therapeutic Deep Rain & Thunder</option>
-                        <option value="https://cdn.pixabay.com/download/audio/2021/09/06/audio_24346e012e.mp3?filename=wind-breeze-ambient-10214.mp3">🍃 Gentle Wind Breeze & Calm</option>
-                        <option value="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=forest-birds-and-nature-108236.mp3">🐦 Forest Birds & Healing Nature</option>
-                        <option value="https://cdn.pixabay.com/download/audio/2022/04/27/audio_13038a2e1d.mp3?filename=ocean-waves-112606.mp3">🌊 Deep Theta Ocean Waves</option>
+                        <!-- রিলায়েবল ও হাই-কোয়ালিটি স্ট্রিমিং লিংক -->
+                        <option value="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg">🌧️ Therapeutic Deep Rain & Thunder</option>
+                        <option value="https://actions.google.com/sounds/v1/weather/wind_gusts.ogg">🍃 Gentle Wind Breeze & Calm</option>
+                        <option value="https://actions.google.com/sounds/v1/environments/forest_birds.ogg">🐦 Forest Birds & Healing Nature</option>
+                        <option value="https://actions.google.com/sounds/v1/water/ocean_waves.ogg">🌊 Deep Theta Ocean Waves</option>
                     </select>
                 </div>
             </div>
@@ -262,7 +264,7 @@
                         <option value="5">5 Cups of Coffee ☕ ($25)</option>
                         <option value="10">10+ Legend Coffees 👑 ($50+)</option>
                     </select>
-                    <!-- ডিরেক্ট পেপাল লিংক ওপেন করার জন্য টার্গেট ব্ল্যাংক বাটন -->
+                    <!-- ডিরেক্ট পেপাল লিংক ওপেন করার বাটন -->
                     <a href="https://paypal.me/JounayadAhmed?locale.x=en_US&country.x=OM" target="_blank" class="btn" style="margin-top: 0; padding: 11px; background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); text-align: center;" onclick="registerSupportName()">☕ Proceed to PayPal & Claim Rank</a>
                 </div>
             </div>
@@ -291,7 +293,8 @@
         function startRelaxationSession() {
             const dropdown = document.getElementById('sound-dropdown');
             audio.src = dropdown.value;
-            audio.play().catch(e => console.log("Audio play restricted"));
+            audio.load();
+            audio.play().catch(e => console.log("Audio play restricted by browser policy:", e));
 
             const status = document.getElementById('status-text');
             clearInterval(interval);
@@ -302,8 +305,10 @@
 
         function changeSound() {
             const dropdown = document.getElementById('sound-dropdown');
+            audio.pause();
             audio.src = dropdown.value;
-            audio.play().catch(e => console.log("Audio play restricted"));
+            audio.load();
+            audio.play().catch(e => console.log("Audio play restricted by browser policy:", e));
         }
 
         async function fetchLeaderboard() {
@@ -331,7 +336,6 @@
         async function registerSupportName() {
             const coffees = document.getElementById('coffee-amount').value;
 
-            // ব্যাকএন্ডে ইউজারের নাম ও কফি কাউন্ট সেভ করে রাখা
             try {
                 await fetch('/api/add-supporter', {
                     method: 'POST',
@@ -342,9 +346,8 @@
                 console.error(err);
             }
             
-            // লিডারবোর্ড রিফ্রেশ করা যাতে নাম ইনস্ট্যান্ট দেখা যায়
             setTimeout(fetchLeaderboard, 1500);
         }
     </script>
 </body>
-                    </html>
+</html>
