@@ -3,20 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SereneSphere - Global Relaxation & Support Hub</title>
+    <title>SereneSphere - Find Peace & Become a Coffee Hero</title>
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
+            --bg: #070913;
+            --card: #10172a;
             --accent: #6366f1;
-            --accent-hover: #4f46e5;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border: #1f2937;
+            --accent-glow: rgba(99, 102, 241, 0.4);
+            --gold: #f59e0b;
+            --text: #f8fafc;
+            --muted: #94a3b8;
+            --border: #1e293b;
         }
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: var(--bg);
+            color: var(--text);
             font-family: 'Inter', system-ui, sans-serif;
             margin: 0;
             padding: 20px;
@@ -28,18 +29,19 @@
         .container {
             width: 100%;
             max-width: 480px;
-            background: var(--card-bg);
+            background: var(--card);
             padding: 30px;
             border-radius: 24px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
             border: 1px solid var(--border);
             text-align: center;
         }
-        h1 { color: #818cf8; margin-bottom: 4px; font-size: 26px; }
-        .subtitle { color: var(--text-muted); font-size: 13px; margin-bottom: 20px; }
+        .logo { font-size: 40px; margin-bottom: 5px; }
+        h1 { color: #818cf8; margin: 0 0 5px 0; font-size: 26px; }
+        .subtitle { color: var(--muted); font-size: 13px; margin-bottom: 20px; }
 
         .btn {
-            background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
             color: white;
             padding: 14px 20px;
             border: none;
@@ -49,193 +51,205 @@
             font-weight: 600;
             width: 100%;
             transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+            box-shadow: 0 4px 15px var(--accent-glow);
             margin-top: 10px;
         }
-        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
+        .btn:hover { opacity: 0.95; transform: translateY(-1px); }
 
-        /* Breathing Section */
-        #relaxation-box {
+        /* Relaxation Breathing Box */
+        #relaxation-panel {
             display: none;
             margin-top: 20px;
             padding: 20px;
-            background: #0d1322;
+            background: #0b0f19;
             border-radius: 16px;
             border: 1px solid var(--border);
         }
-        .breathing-circle {
-            width: 80px;
-            height: 80px;
+        .circle {
+            width: 90px;
+            height: 90px;
             background: radial-gradient(circle, #818cf8, #4f46e5);
             border-radius: 50%;
             margin: 15px auto;
+            box-shadow: 0 0 25px var(--accent-glow);
             animation: breathe 4s infinite alternate ease-in-out;
         }
         @keyframes breathe {
-            0% { transform: scale(0.8); opacity: 0.4; }
+            0% { transform: scale(0.75); opacity: 0.4; }
             100% { transform: scale(1.25); opacity: 1; }
         }
 
-        /* Supporters Box */
-        .box {
+        /* Hall of Fame / Leaderboard */
+        .board-box {
             margin-top: 20px;
             padding: 16px;
-            background: #0d1322;
+            background: #0b0f19;
             border-radius: 16px;
             text-align: left;
             border: 1px solid var(--border);
         }
-        .box h3 { margin: 0 0 10px 0; font-size: 14px; color: #e5e7eb; }
-        ul { padding-left: 18px; color: var(--text-muted); margin: 0; font-size: 13px; }
-        li { margin-bottom: 5px; }
-
-        .form-group {
-            margin-top: 12px;
+        .board-box h3 { margin: 0 0 5px 0; font-size: 14px; color: #cbd5e1; display: flex; align-items: center; gap: 6px; }
+        .board-desc { font-size: 11px; color: var(--muted); margin-bottom: 12px; line-height: 1.4; }
+        
+        .supporters-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+        .supporters-list li {
+            background: #131b2e;
+            padding: 10px 12px;
+            border-radius: 10px;
+            margin-bottom: 8px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            border: 1px solid #1e293b;
+        }
+        .supporter-info span { display: block; }
+        .supporter-name { font-weight: 600; color: #f8fafc; }
+        .supporter-badge { font-size: 10px; color: var(--gold); margin-top: 2px; }
+        .supporter-coffees { background: rgba(99, 102, 241, 0.2); color: #818cf8; padding: 4px 10px; border-radius: 20px; font-weight: 700; font-size: 12px; }
+
+        /* Support Form */
+        .support-form {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
             gap: 8px;
         }
-        .form-group input {
-            flex: 1;
+        .support-form input, .support-form select {
             padding: 10px 12px;
-            background: #1f2937;
+            background: #131b2e;
             border: 1px solid var(--border);
             border-radius: 10px;
             color: white;
             font-size: 13px;
             outline: none;
         }
-        .form-group input:focus { border-color: #818cf8; }
-
-        /* Coffee Support & Store Button */
-        .support-links {
-            margin-top: 20px;
-            display: flex;
-            gap: 10px;
-        }
-        .support-btn {
-            flex: 1;
-            background: #1f2937;
-            color: #f3f4f6;
-            padding: 10px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            border: 1px solid var(--border);
-            transition: 0.3s;
-            display: inline-block;
-            text-align: center;
-        }
-        .support-btn:hover { background: #374151; border-color: #818cf8; }
+        .support-form input:focus, .support-form select:focus { border-color: #818cf8; }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <div class="logo">🌿</div>
         <h1>SereneSphere</h1>
-        <div class="subtitle">Your ultimate sanctuary for focus, relaxation & peace.</div>
+        <div class="subtitle">Calm your mind, refresh your soul, and claim your legacy.</div>
 
-        <button class="btn" onclick="toggleRelaxation()">Start Focus & Breathing Session</button>
+        <!-- Relaxation Trigger Button -->
+        <button class="btn" onclick="toggleSession()">🧘 Start Relaxation Session</button>
 
-        <!-- Interactive Breathing Module with Sound Simulation -->
-        <div id="relaxation-box">
-            <div class="breathing-circle"></div>
-            <h3 id="breath-status" style="color: #818cf8; margin: 10px 0 5px 0;">Inhale Slowly...</h3>
-            <audio id="chill-audio" loop src="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg"></audio>
-            <button class="btn" style="background: #374151; font-size: 13px; padding: 8px; margin-top: 10px;" onclick="toggleAudio()">🔊 Toggle Rain Ambience</button>
+        <!-- Interactive Breathing & Ambient Panel -->
+        <div id="relaxation-panel">
+            <div class="circle"></div>
+            <h3 id="status-text" style="color: #818cf8; margin: 10px 0 5px 0;">Inhale Deeply...</h3>
+            <audio id="ambient-audio" loop src="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg"></audio>
+            <button class="btn" style="background: #1e293b; font-size: 13px; padding: 10px; margin-top: 8px;" onclick="toggleSound()">🔊 Toggle Ambient Rain Sound</button>
         </div>
 
-        <!-- Coffee Heroes / Supporters Hub -->
-        <div class="box">
-            <h3>☕ Coffee Heroes (Global Supporters)</h3>
-            <ul id="supporter-list">
-                <li>Loading supporters...</li>
+        <!-- Coffee Heroes Hall of Fame -->
+        <div class="board-box">
+            <h3>🏆 Permanent Coffee Heroes Hall of Fame</h3>
+            <div class="board-desc">
+                Relax your mind, then fuel this project! Higher coffee support guarantees top rank & permanent visibility on the leaderboard.
+            </div>
+            
+            <ul class="supporters-list" id="leaderboard">
+                <li><span>Loading legends...</span></li>
             </ul>
 
-            <div class="form-group">
-                <input type="text" id="supporter-name" placeholder="Your name...">
-                <button class="btn" style="width: auto; margin-top:0; padding: 10px 14px; font-size: 13px;" onclick="addSupporter()">Join</button>
+            <!-- Support Submission Form -->
+            <div class="support-form">
+                <input type="text" id="donor-name" placeholder="Your Full Name / Brand...">
+                <select id="coffee-amount">
+                    <option value="1">1 Cup of Coffee ☕ ($5)</option>
+                    <option value="3">3 Cups of Coffee ☕ ($15)</option>
+                    <option value="5">5 Cups of Coffee ☕ ($25)</option>
+                    <option value="10">10+ Legend Coffees 👑 ($50+)</option>
+                </select>
+                <button class="btn" style="margin-top: 0; padding: 11px; background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);" onclick="sendSupport()">☕ Claim Your Spot as a Coffee Hero</button>
             </div>
-        </div>
-
-        <!-- Real Payment & Store Links -->
-        <div class="support-links">
-            <a href="https://www.buymeacoffee.com" target="_blank" class="support-btn">☕ Buy Coffee</a>
-            <a href="https://play.google.com" target="_blank" class="support-btn">📱 Get App</a>
         </div>
     </div>
 
     <script>
-        let isRunning = false;
-        let timer;
-        const audio = document.getElementById('chill-audio');
+        let active = false;
+        let interval;
+        const audio = document.getElementById('ambient-audio');
 
-        function toggleRelaxation() {
-            const box = document.getElementById('relaxation-box');
-            const status = document.getElementById('breath-status');
-            
-            if (!isRunning) {
-                box.style.display = 'block';
-                isRunning = true;
-                audio.play().catch(e => console.log("Audio autoplay restricted"));
-                timer = setInterval(() => {
-                    status.textContent = status.textContent.includes('Inhale') ? 'Exhale Gently...' : 'Inhale Slowly...';
+        function toggleSession() {
+            const panel = document.getElementById('relaxation-panel');
+            const status = document.getElementById('status-text');
+
+            if (!active) {
+                panel.style.display = 'block';
+                active = true;
+                audio.play().catch(e => console.log("Audio play blocked"));
+                interval = setInterval(() => {
+                    status.textContent = status.textContent.includes('Inhale') ? 'Exhale Gently...' : 'Inhale Deeply...';
                 }, 4000);
             } else {
-                box.style.display = 'none';
-                isRunning = false;
+                panel.style.display = 'none';
+                active = false;
                 audio.pause();
-                clearInterval(timer);
+                clearInterval(interval);
             }
         }
 
-        function toggleAudio() {
-            if (audio.paused) {
-                audio.play();
-            } else {
-                audio.pause();
-            }
+        function toggleSound() {
+            if (audio.paused) { audio.play(); } else { audio.pause(); }
         }
 
-        async function loadSupporters() {
+        async function fetchLeaderboard() {
             try {
-                const response =/api/supporters';
                 const res = await fetch('/api/supporters');
                 const data = await res.json();
-                const listEl = document.getElementById('supporter-list');
-                listEl.innerHTML = '';
+                const list = document.getElementById('leaderboard');
+                list.innerHTML = '';
                 data.forEach(item => {
                     const li = document.createElement('li');
-                    li.textContent = `${item.name} — ${item.coffee}`;
-                    listEl.appendChild(li);
+                    li.innerHTML = `
+                        <div class="supporter-info">
+                            <span class="supporter-name">👤 ${item.name}</span>
+                            <span class="supporter-badge">${item.badge}</span>
+                        </div>
+                        <span class="supporter-coffees">${item.coffees} ☕</span>
+                    `;
+                    list.appendChild(li);
                 });
-            } catch (error) {
-                console.error('Error loading data:', error);
+            } catch (err) {
+                console.error(err);
             }
         }
 
-        async function addSupporter() {
-            const nameInput = document.getElementById('supporter-name');
-            const name = nameInput.value.trim();
-            if (!name) return alert('Please enter your name!');
+        async function sendSupport() {
+            const name = document.getElementById('donor-name').value.trim();
+            const coffees = document.getElementById('coffee-amount').value;
+
+            if (!name) return alert('Please enter your name or brand!');
 
             try {
-                const response = await fetch('/api/add-supporter', {
+                const res = await fetch('/api/add-supporter', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, coffee: '1 Coffee ☕' })
+                    body: JSON.stringify({ name, coffees })
                 });
-                const result = await response.json();
+                const result = await res.json();
                 if (result.success) {
-                    nameInput.value = '';
-                    loadSupporters();
+                    document.getElementById('donor-name').value = '';
+                    alert('Thank you! Your name has been permanently immortalized on top of the Coffee Heroes Leaderboard.');
+                    fetchLeaderboard();
                 }
-            } catch (error) {
-                console.error('Error adding supporter:', error);
+            } catch (err) {
+                console.error(err);
             }
         }
 
-        loadSupporters();
+        fetchLeaderboard();
     </script>
 </body>
-</html>
+        </html>
