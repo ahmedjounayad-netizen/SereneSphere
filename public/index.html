@@ -65,6 +65,9 @@
             width: 100%;
             transition: 0.3s;
             box-shadow: 0 4px 20px var(--accent-glow);
+            text-decoration: none;
+            display: inline-block;
+            box-sizing: border-box;
             margin-top: 10px;
         }
         .btn:hover { opacity: 0.95; transform: translateY(-2px); }
@@ -88,7 +91,7 @@
         }
         .welcome-input:focus { border-color: #818cf8; }
 
-        /* Main App Interface (Initially Hidden) */
+        /* Main App Interface */
         #main-app {
             display: none;
             animation: fadeIn 0.5s ease-in-out;
@@ -179,7 +182,7 @@
         .supporter-badge { font-size: 9px; color: var(--gold); }
         .supporter-coffees { background: rgba(99, 102, 241, 0.2); color: #818cf8; padding: 3px 8px; border-radius: 20px; font-weight: 700; }
 
-        /* Support Form & PayPal */
+        /* Support Form */
         .support-form {
             margin-top: 15px;
             display: flex;
@@ -200,17 +203,17 @@
 <body>
 
     <div class="container">
-        <!-- Step 1: Welcome Home Screen (Logo + Name Entry) -->
+        <!-- Welcome Screen -->
         <div id="welcome-screen">
             <div class="logo-badge">🌿</div>
             <h1>SereneSphere</h1>
-            <div class="subtitle">Your ultimate sanctuary for mental clarity, relaxation, and inner peace. Enter your name to begin your journey.</div>
+            <div class="subtitle">Your ultimate sanctuary for mental clarity, scientific relaxation, and inner peace. Enter your name to begin.</div>
             
             <input type="text" id="user-display-name" class="welcome-input" placeholder="Enter your name or brand...">
             <button class="btn" onclick="enterApp()">✨ Enter Sanctuary</button>
         </div>
 
-        <!-- Step 2: Main App Interface (Relaxation, Sounds & Coffee Support) -->
+        <!-- Main App Interface -->
         <div id="main-app">
             <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 15px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
@@ -220,7 +223,7 @@
                 <span id="greeting-user" style="font-size: 12px; color: var(--muted);">Hello, Guest</span>
             </div>
 
-            <!-- Relaxation & Multi-Sound Panel -->
+            <!-- Relaxation & Therapeutic Sounds Panel -->
             <div class="relaxation-panel">
                 <div class="circle-wrapper">
                     <div class="perfect-circle"></div>
@@ -230,28 +233,28 @@
                 <audio id="ambient-audio" loop></audio>
 
                 <div class="sound-selector">
-                    <label>🎵 Select Soundscape:</label>
+                    <label>🎵 Select Therapeutic Soundscape:</label>
                     <select id="sound-dropdown" onchange="changeSound()">
-                        <option value="https://actions.google.com/sounds/v1/weather/rain_heavy_loud.ogg">🌧️ Heavy Rain Ambience</option>
-                        <option value="https://actions.google.com/sounds/v1/weather/wind_gusts.ogg">🍃 Gentle Wind Breeze</option>
-                        <option value="https://actions.google.com/sounds/v1/environments/forest_birds.ogg">🐦 Forest Birds & Nature</option>
-                        <option value="https://actions.google.com/sounds/v1/water/ocean_waves.ogg">🌊 Calming Ocean Waves</option>
+                        <option value="https://cdn.pixabay.com/download/audio/2022/05/16/audio_db3227449a.mp3?filename=rain-and-thunder-nature-sounds-7098.mp3">🌧️ Therapeutic Deep Rain & Thunder</option>
+                        <option value="https://cdn.pixabay.com/download/audio/2021/09/06/audio_24346e012e.mp3?filename=wind-breeze-ambient-10214.mp3">🍃 Gentle Wind Breeze & Calm</option>
+                        <option value="https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3?filename=forest-birds-and-nature-108236.mp3">🐦 Forest Birds & Healing Nature</option>
+                        <option value="https://cdn.pixabay.com/download/audio/2022/04/27/audio_13038a2e1d.mp3?filename=ocean-waves-112606.mp3">🌊 Deep Theta Ocean Waves</option>
                     </select>
                 </div>
             </div>
 
-            <!-- Coffee Heroes Hall of Fame & PayPal Integration -->
+            <!-- Coffee Heroes Hall of Fame & Direct PayPal Button -->
             <div class="board-box">
                 <h3>🏆 Coffee Heroes Hall of Fame</h3>
                 <div class="board-desc">
-                    Feeling peaceful? Fuel this project via PayPal to secure permanent top rank & high visibility on our global leaderboard.
+                    Feeling calm? Support the creator via PayPal to instantly secure your rank on our global leaderboard.
                 </div>
                 
                 <ul class="supporters-list" id="leaderboard">
                     <li><span>Loading legends...</span></li>
                 </ul>
 
-                <!-- Support Submission Form -->
+                <!-- Support Form -->
                 <div class="support-form">
                     <select id="coffee-amount">
                         <option value="1">1 Cup of Coffee ☕ ($5)</option>
@@ -259,7 +262,8 @@
                         <option value="5">5 Cups of Coffee ☕ ($25)</option>
                         <option value="10">10+ Legend Coffees 👑 ($50+)</option>
                     </select>
-                    <button class="btn" style="margin-top: 0; padding: 11px; background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);" onclick="processPayPalSupport()">☕ Proceed to PayPal & Claim Rank</button>
+                    <!-- ডিরেক্ট পেপাল লিংক ওপেন করার জন্য টার্গেট ব্ল্যাংক বাটন -->
+                    <a href="https://paypal.me/JounayadAhmed?locale.x=en_US&country.x=OM" target="_blank" class="btn" style="margin-top: 0; padding: 11px; background: linear-gradient(135deg, #f59e0b, #d97706); box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); text-align: center;" onclick="registerSupportName()">☕ Proceed to PayPal & Claim Rank</a>
                 </div>
             </div>
         </div>
@@ -269,7 +273,6 @@
         let currentUserName = "";
         let audio = document.getElementById('ambient-audio');
         let interval;
-        const PAYPAL_BASE_URL = "https://paypal.me/JounayadAhmed?locale.x=en_US&country.x=OM";
 
         function enterApp() {
             const nameInput = document.getElementById('user-display-name').value.trim();
@@ -278,11 +281,9 @@
             currentUserName = nameInput;
             document.getElementById('greeting-user').textContent = `Hello, ${currentUserName}`;
             
-            // হোম স্ক্রিন হাইড করে মেইন অ্যাপ শো করা
             document.getElementById('welcome-screen').style.display = 'none';
             document.getElementById('main-app').style.display = 'block';
 
-            // সাউন্ড ও ব্রিদিং সেশন অটো স্টার্ট করা
             startRelaxationSession();
             fetchLeaderboard();
         }
@@ -293,6 +294,7 @@
             audio.play().catch(e => console.log("Audio play restricted"));
 
             const status = document.getElementById('status-text');
+            clearInterval(interval);
             interval = setInterval(() => {
                 status.textContent = status.textContent.includes('Inhale') ? 'Exhale Gently...' : 'Inhale Deeply...';
             }, 4000);
@@ -301,7 +303,7 @@
         function changeSound() {
             const dropdown = document.getElementById('sound-dropdown');
             audio.src = dropdown.value;
-            audio.play();
+            audio.play().catch(e => console.log("Audio play restricted"));
         }
 
         async function fetchLeaderboard() {
@@ -326,10 +328,10 @@
             }
         }
 
-        async function processPayPalSupport() {
+        async function registerSupportName() {
             const coffees = document.getElementById('coffee-amount').value;
 
-            // ব্যাকএন্ডে ইউজারনেমসহ সেভ করা
+            // ব্যাকএন্ডে ইউজারের নাম ও কফি কাউন্ট সেভ করে রাখা
             try {
                 await fetch('/api/add-supporter', {
                     method: 'POST',
@@ -339,11 +341,10 @@
             } catch (err) {
                 console.error(err);
             }
-
-            alert('Redirecting securely to your PayPal account to complete coffee support...');
-            window.open(PAYPAL_BASE_URL, '_blank');
-            fetchLeaderboard();
+            
+            // লিডারবোর্ড রিফ্রেশ করা যাতে নাম ইনস্ট্যান্ট দেখা যায়
+            setTimeout(fetchLeaderboard, 1500);
         }
     </script>
 </body>
-            </html>
+                    </html>
