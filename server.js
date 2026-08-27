@@ -7,7 +7,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// লিডারবোর্ড ডেটা
 let supporters = [
     { name: 'Jounayad Ahmed', coffees: 10, badge: '👑 Legend Supporter' },
     { name: 'Ayaan', coffees: 5, badge: '⭐ Elite Patron' }
